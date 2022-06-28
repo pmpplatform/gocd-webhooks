@@ -1,0 +1,27 @@
+[
+  {
+    "id": "gitea",
+    "trigger-rule-mismatch-http-response-code": 412,
+    "include-command-output-in-response": true,
+    "include-command-output-in-response-on-error": true,
+    "execute-command": "relay.sh",
+    "command-working-directory": "/opt/webhook",
+    "pass-environment-to-command": [
+      {
+        "envname": "MATERIAL_URL",
+        "source": "payload",
+        "name": "repository.clone_url"
+      }
+    ],
+    "trigger-rule": {
+      "match": {
+        "type": "value",
+        "value": "refs/heads/master",
+        "parameter": {
+          "source": "payload",
+          "name": "ref"
+        }
+      }
+    }
+  }
+]
